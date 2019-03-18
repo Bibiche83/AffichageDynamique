@@ -1,0 +1,21 @@
+Problèmes actuel encore non résolu :
+
+- Visualisation de l'image dans la frame
+
+- Visualisation du PDf
+
+- Envoyer les fichier dans le fichier XML généré ( problème de variable local global)
+
+- problème au niveau du calendrier 
+
+- durée d'affichage
+
+- Editer, nouveau etc.. Fichier
+
+
+
+ATTENTION : 
+
+Pour les vidéos, seul le format .avi est lu...
+
+
