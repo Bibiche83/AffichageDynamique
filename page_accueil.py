@@ -501,12 +501,6 @@ def convert_pdf_to_txt():
   fp.close()
   device.close()
   retstr.close()
-  
- 
-
-
-
-
 
 
 # ################################"CREATION FICHIER XML ##################################################
@@ -617,7 +611,7 @@ def generer() :
 
  xml_str = scenario.toprettyxml(indent ="\t")
 
- fichier_xml = "scenariotype1.xml"
+ fichier_xml = "scenariotype.xml"
  shutil.copy(fichier_xml,"Q:\Espace d'echange\scenario")
  with open(fichier_xml, "w") as f:
   f.write(xml_str)
