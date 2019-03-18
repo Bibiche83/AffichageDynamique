@@ -1,46 +1,53 @@
 # -*- coding: utf-8 -*-
 
 # ##########################importation des librairies nécessaires ##########################################
-import shutil
-from tkinter import *
-from tkinter.messagebox import *
-from tkinter.filedialog import *
-from PIL import Image, ImageTk
-import socket
-import PyQt5
 import os
-from PyQt5.QtCore import QDir, Qt, QUrl
-from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
-from PyQt5.QtMultimediaWidgets import QVideoWidget
-from PyQt5.QtWidgets import (QApplication, QFileDialog, QHBoxLayout, QLabel,QPushButton, QSizePolicy, QSlider, QStyle, QVBoxLayout, QWidget)
-from PyQt5.QtWidgets import QMainWindow,QWidget, QPushButton, QAction
-from PyQt5.QtGui import QIcon
+from os import chdir
 import sys
+from io import StringIO
+
+import shutil # Module pour traitement fichier ( cut and paste)
+
+from tkinter import * # Module pour affichage graphique
+from tkinter.messagebox import * # Module pour affichage graphique
+from tkinter.filedialog import * # Module pour affichage graphique
+from PIL import Image, ImageTk # Module pour affichage graphique et traitement image
+
+import PyQt5 # Module pour affichage graphique et lecteur vidéos
+from PyQt5.QtCore import QDir, Qt, QUrl # Module pour affichage graphique et lecteur vidéos
+from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer # Module pour affichage graphique et lecteur vidéos
+from PyQt5.QtMultimediaWidgets import QVideoWidget # Module pour affichage graphique et lecteur vidéos
+from PyQt5.QtWidgets import (QApplication, QFileDialog, QHBoxLayout, QLabel,QPushButton, QSizePolicy, QSlider, QStyle, QVBoxLayout, QWidget)
+from PyQt5.QtWidgets import QMainWindow,QWidget, QPushButton, QAction # Module pour affichage graphique et lecteur vidéos
+from PyQt5.QtGui import QIcon # Module pour affichage graphique et lecteur vidéos
+
+import socket # Module pour socket
+
 from calendar import monthcalendar # Module servant à instancier les mois du calendrier
 from time import localtime # Importation de la date et de l'heure locales
 from datetime import datetime # Module permettant de manipuler les dates et les durées.
-from os import chdir
-from lxml import etree
-import xml.etree.ElementTree as etree
-import os
-from xml.dom import minidom
-from pdfminer import *
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
-from pdfminer.converter import TextConverter
-from pdfminer.layout import LAParams
-from pdfminer.pdfpage import PDFPage
-from io import StringIO
+
+from lxml import etree # module lié au fichier xml
+import xml.etree.ElementTree as etree # module lié au fichier xml
+from xml.dom import minidom # module lié au fichier xml
+
+from pdfminer import * # bibliothèque liée au traitement pdf
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter # bibliothèque liée au traitement pdf
+from pdfminer.converter import TextConverter # bibliothèque liée au traitement pdf
+from pdfminer.layout import LAParams # bibliothèque liée au traitement pdf
+from pdfminer.pdfpage import PDFPage # bibliothèque liée au traitement pdf
+
 from agenda import Agenda # Module permettant d'ouvrir l'agenda
 
 
 
 # ####################### On créez la fenetre et on lui donne une taille en pixel ############################
-fenetre = Tk()
+fenetre = Tk() # création de la fen^tre
 fenetre.geometry("1600x900")
-fenetre.configure(bg='#A9EAFE')
+fenetre.configure(bg='#A9EAFE') # on lui donne une couleur de fond
 
-Titre = Label(fenetre, text='PROJET AFFICHAGE NUMERIQUE EN PYTHON IHM ADRIEN',bg='#74D0F1' ,relief = GROOVE)
-Titre.pack(side = TOP)
+Titre = Label(fenetre, text='PROJET AFFICHAGE NUMERIQUE EN PYTHON IHM ADRIEN',bg='#74D0F1' ,relief = GROOVE) # on créez un label pour donner un titre à la fenetre
+Titre.pack(side = TOP) # affichage du label
 
 
 
@@ -100,7 +107,7 @@ Champ2.pack(padx = 5, pady = 5)
 # ################################# Création d'une fonction principale pour lecteur Vidéos PyQt5 ########################
     
     
-class VideoWindow(QMainWindow):
+class VideoWindow(QMainWindow): # création class Lecteur Vidéo
     
  def __init__(self, parent=None):
             super(VideoWindow, self).__init__(parent)
@@ -168,7 +175,7 @@ class VideoWindow(QMainWindow):
             self.mediaPlayer.error.connect(self.handleError)
    
    
- def openFile(self):
+ def openFile(self): # fonction ouvrir fichier vidéo
             fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",QDir.homePath())
             print(fileName)
             if fileName != '':
@@ -223,12 +230,12 @@ def insererimage():
     image = ImageTk.PhotoImage(Image.open(photo))
     canvas= Canvas(Frame4)
     canvas.create_image(100, 100,anchor =NW, image=image) 
-    shutil.copy(photo,"Q:\Espace d'echange\TEST_PYTHON")
-    print(photo)
-    canvas.pack() 
+    shutil.copy(photo,"Q:\Espace d'echange\TEST_PYTHON") # copie de l'image dans un autre fichier
+    print(photo) # affichage du chemin de l'image dans la console
+    canvas.pack()  # affichage du canevas
 
 
-# #########################Création de la fonction créer ######################################################
+# #########################Création du calendrier ######################################################
 
 
 def ChoisirDate(): 
@@ -433,9 +440,9 @@ def ChoisirDate():
          # Compréhension de liste. La méthode next_month et activée 12 fois :    
          [self.next_month() for i in range(12)]
     
- #=========== MAIN PROGRAMM ================================================================================
+ #=========== Programme Principale ================================================================================
   
- if __name__ == "__main__":
+  if __name__ == "__main__":
      fenetre = Tk()
      fenetre.title('Date et Jour')
      mainframe = Frame(fenetre, bg='white')
@@ -455,10 +462,10 @@ def apropos():
     showinfo("A propos", "Cette application a été créée par M. Adrien MARIE dans le cadre du projet BTS SN IR : AFFICHAGE NUMERIQUE. Elle est actuellement en développement.")
     
 
-# ##########################Création de la fonction televerser ################################################
+# ##########################Création de la fonction envoyer ( socket) ################################################
 
 
-def televerser():
+def envoyer():
     
     HOST = "192.168.0.74"
     PORT = "80"
@@ -477,7 +484,7 @@ def televerser():
 
 
         
-# ##################################################Création fonction ajouter texte #####################################################
+# ##################################################Création fonction ajouter PDF #####################################################
 
 
 def convert_pdf_to_txt():
@@ -501,7 +508,7 @@ def convert_pdf_to_txt():
  text = retstr.getvalue()
  Label(Frame5, text=fp).pack(padx=10, pady=10)
  print(path)
- shutil.copy(path,"Q:\Espace d'echange\TEST_PYTHON")
+ shutil.copy(path,"Q:\Espace d'echange\TEST_PYTHON") # copie du fichier PDF dans un autre dossier
  fp.close()
  device.close()
  retstr.close()
@@ -625,11 +632,13 @@ def generer() :
  with open(fichier_xml, "w") as f:
   f.write(xml_str)
 
-# ###############################Création du bouton TELEVERSER ###############################################
+# ###############################Création du bouton Envoyer ###############################################
           
           
-boutonGenerer = Button(fenetre, text="Envoyer",bg='#FBF2B7',cursor="circle", command = televerser) 
+boutonGenerer = Button(fenetre, text="Envoyer",bg='#FBF2B7',cursor="circle", command = envoyer) 
 boutonGenerer.pack(side=BOTTOM, padx=10, pady=10)
+
+# #####################################Création du bouton Generer #######################################"
 boutonGenerer2 = Button(fenetre, text="generer",bg='#FBF2B7',cursor="circle", command = generer) 
 boutonGenerer2.pack(side=BOTTOM, padx=10, pady=10)
   
@@ -666,7 +675,7 @@ BoutonVal1 = Button(Frame2, text ='Ajouter du Texte',bg='#79F8F8', command=conve
 AjouterImage= Button(Frame1, text ='Ajouter une Image',bg='#79F8F8', command=insererimage).pack(side=LEFT, padx=5, pady=5)
 SupprimerImage= Button(Frame1, text ='Supprimer une Image',bg='#79F8F8').pack(side=RIGHT, padx=5, pady=5)
 
-fenetre.config(menu=menubar)
+fenetre.config(menu=menubar) # Affichage du menu déroulant de la fenetre
 
 
                 
