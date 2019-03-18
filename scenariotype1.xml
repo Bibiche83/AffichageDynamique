@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<scenario>
+	<info>
+		<dateactivite>04-03-2019</dateactivite>
+		<hdebut>16:00</hdebut>
+		<hfin>13:00</hfin>
+		<cheminfichier>chemin/du/fichier/choisit</cheminfichier>
+		<ecranconcerne>ecranprincipale</ecranconcerne>
+	</info>
+	<image>
+		<nom>Adrien_image</nom>
+		<chemin>chemin</chemin>
+		<type>JPEG</type>
+		<duree>3sec</duree>
+	</image>
+	<TEXTE>
+		<nom>Adrien_texte</nom>
+		<chemin>fichiertexte</chemin>
+		<type>PDF</type>
+		<duree>5sec</duree>
+	</TEXTE>
+	<VIDEOS>
+		<nom>eee</nom>
+		<chemin>fichiervideo</chemin>
+		<type>MP4</type>
+		<duree>10.5sec</duree>
+	</VIDEOS>
+	<DESCRIPTION>
+		<duree>18.5sec</duree>
+		<type>entré brute</type>
+	</DESCRIPTION>
+</scenario>
